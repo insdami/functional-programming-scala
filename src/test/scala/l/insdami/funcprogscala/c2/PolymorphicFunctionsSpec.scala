@@ -29,5 +29,17 @@ class PolymorphicFunctionsSpec extends FlatSpec {
     assert(PolymorphicFunctions.isSorted(Array(1), ordered))
   }
 
+  "given partial function that just add 1 to a number" should "return a number + 1" in {
+    val plus:(Int, Int) => Int = (n1, n2) => n1 + n2
+    val addOne = PolymorphicFunctions.partial1(1, plus)
+    assert(addOne(1) == 2)
+  }
+
+  "given partial function that does a number times 2" should "return that number ^ 2" in {
+    val multiply:(Int, Int) => Int = (n1, n2) => n1 * n2
+    val pow2 = PolymorphicFunctions.partial1(2, multiply)
+    assert(pow2(2) == 4)
+  }
+
 
 }

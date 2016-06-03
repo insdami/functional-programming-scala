@@ -47,4 +47,10 @@ class PolymorphicFunctionsSpec extends FlatSpec {
     assert(curried(2)(2) == multiply(2,2))
   }
 
+  "an uncurried function" should "return the same result as the curried one" in {
+    val multiply = (n1:Int) => (n2:Int) => { n1 * n2}
+    val uncurried = PolymorphicFunctions.uncurry(multiply)
+    assert(uncurried(2, 2) == multiply(2)(2))
+  }
+
 }

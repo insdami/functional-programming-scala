@@ -53,4 +53,11 @@ class PolymorphicFunctionsSpec extends FlatSpec {
     assert(uncurried(2, 2) == multiply(2)(2))
   }
 
+  "a composed function" should "return the same result as the non composed one" in {
+    val addOne: Int => Int = _ + 1
+    val toString: Int => String = _.toString
+    val composed = PolymorphicFunctions.compose(toString, addOne)
+    assert(composed(5) == toString(addOne(5)))
+  }
+
 }

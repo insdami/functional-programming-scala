@@ -44,6 +44,44 @@ class ListSpec extends FlatSpec {
     assert(List.dropWhile(List(1,2,3,4,5), (e: Int) => e > 10) == List(1,2,3,4,5))
   }
 
+  "executing init on List(1,2,3,4,5)" should "retrieve List(1,2,3,4)" in {
+    assert(List.init(List(1,2,3,4,5)) == List(1,2,3,4))
+  }
 
+  "executing init on List(1)" should "retrieve Nil" in {
+    assert(List.init(List(1)) == Nil)
+  }
+
+  "executing length on List(1)" should "retrieve a size of 1" in {
+    assert(List.length(List(1)) == 1)
+  }
+
+  "executing length on Nil" should "retrieve a size of 0" in {
+    assert(List.length(Nil) == 0)
+  }
+
+  "executing length on List(1,2,3)" should "retrieve a size of 3" in {
+    assert(List.length(List(1,2,3)) == 3)
+  }
+
+  "executing foldLeft on List(1,2,3) transforming it into a string" should "retrieve 123" in {
+    assert(List.foldLeft(List(1,2,3), "")((str, n) => str + n) == "123")
+  }
+
+  "executing foldLeft on Nil transforming it into a string" should "retrieve an empty string" in {
+    assert(List.foldLeft(Nil, "")((str, n) => str + n) == "")
+  }
+
+  "executing map on List(1,2,3) transforming each number into a string" should "retrieve list of strings" in {
+    assert(List.map(List(1,2,3))(_.toString) == List("1", "2", "3"))
+  }
+
+  "executing map on List(1,2,3) multiplying them by 2" should "retrieve List(2,4,6)" in {
+    assert(List.map(List(1,2,3))(_ * 2) == List(2,4,6))
+  }
+
+  "executing map on Nil transforming into String" should "retrieve Nil" in {
+    assert(List.map(Nil)(_.toString) == Nil)
+  }
 
 }

@@ -66,4 +66,27 @@ object List {
     case _ => l
   }
 
+  def init[A](l: List[A]): List[A] = {
+    def go(source: List[A], init: List[A]): List[A] = source match {
+      case Cons(_,Nil) => init
+      case Cons(x,xs) => go(xs, append(init, Cons(x, Nil)))
+    }
+    go(l, Nil)
+  }
+
+  def length[A](l: List[A]): Int =
+    foldRight(l, 0)((elem, size) => size + 1)
+
+  def foldLeft[A,B](l: List[A], z: B)(f: (B, A) => B): B = l match {
+    case Nil => z
+    case Cons(x, xs) => foldLeft(xs, f(z, x))(f)
+  }
+
+  def map[A,B](l: List[A])(f: A => B): List[B] = {
+    def go(source: List[A], mapped: List[B] = Nil): List[B] = source match {
+      case Nil => mapped
+      case Cons(x, xs) => go(xs, append(mapped, Cons(f(x), Nil)))
+    }
+    go(l)
+  }
 }

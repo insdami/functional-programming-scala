@@ -84,4 +84,45 @@ class ListSpec extends FlatSpec {
     assert(List.map(Nil)(_.toString) == Nil)
   }
 
+  "executing reverse on Nil" should "retrieve Nil" in {
+    assert(List.reverse(Nil) == Nil)
+  }
+
+  "executing reverse on List(1,2,3)" should "retrieve List(3,2,1)" in {
+    assert(List.reverse(List(1,2,3)) == List(3,2,1))
+  }
+
+  "executing reverse on List(1)" should "retrieve List(1)" in {
+    assert(List.reverse(List(1)) == List(1))
+  }
+
+  "executing append on List(1) and List(2,3)" should "retrieve List(1,2,3)" in {
+    assert(List.append2(List(1), List(2,3)) == List(1,2,3))
+  }
+
+  "executing append on Nil and List(2,3)" should "retrieve List(2,3)" in {
+    assert(List.append2(Nil, List(2,3)) == List(2,3))
+  }
+
+  "executing append on List(1) and Nil" should "retrieve List(1)" in {
+    assert(List.append2(List(1), Nil) == List(1))
+  }
+
+  "executing append on Nil and Nil" should "retrieve Nil" in {
+    assert(List.append2(Nil, Nil) == Nil)
+  }
+
+  "executing filter on List(1,2,3,4,5,6) filtering even numbers" should "retrieve List(2,4,6)" in {
+    assert(List.filter(List(1,2,3,4,5,6))(n => n % 2 == 0 ) == List(2,4,6))
+  }
+
+  "executing concat on List(List(1), List(2), List(3)) filtering even numbers" should "retrieve List(1,2,3)" in {
+    assert(List.concat(List(List(1), List(2), List(3))) == List(1,2,3))
+  }
+
+  "executing flatMap(List(1,2,3))(i => List(i,i))" should "List(1,1,2,2,3,3)" in {
+    assert(List.flatMap(List(1,2,3))(i => List(i,i)) == List(1,1,2,2,3,3))
+  }
+
+
 }

@@ -124,5 +124,36 @@ class ListSpec extends FlatSpec {
     assert(List.flatMap(List(1,2,3))(i => List(i,i)) == List(1,1,2,2,3,3))
   }
 
+  "executing zipWith(List(1,2,3), List(4,5,6))(_ + _)" should "List(5,7,9)" in {
+    assert(List.zipWith(List(1,2,3), List(4,5,6))(_ + _) == List(5,7,9))
+  }
+
+  "executing zipWith(List(1,2,3,5,6,7), List(4,5,6))(_ + _)" should "List(5,7,9)" in {
+    assert(List.zipWith(List(1,2,3,5,6,7), List(4,5,6))(_ + _) == List(5,7,9))
+  }
+
+  "executing zipWith(List(1,2,3,5,6,7), Nil)(_ + _)" should "return Nil" in {
+    assert(List.zipWith(List(1,2,3,5,6,7), Nil)(_ + _) == Nil)
+  }
+
+  "executing hasSubsequence(List(1,2,3,5,6,7), Nil)" should "return true" in {
+    assert(List.hasSubsequence(List(1,2,3,5,6,7), Nil))
+  }
+
+  "executing hasSubsequence(List(1,2,3,5,6,7), List(3,2,1))" should "return false" in {
+    assert(!List.hasSubsequence(List(1,2,3,5,6,7), List(3,2,1)))
+  }
+
+  "executing hasSubsequence(List(1,2,3,5,6,7), List(1,2,3))" should "return true" in {
+    assert(List.hasSubsequence(List(1,2,3,5,6,7), List(1,2,3)))
+  }
+
+  "executing hasSubsequence(List(1,2,3,5,6,7), List(5,6,7))" should "return true" in {
+    assert(List.hasSubsequence(List(1,2,3,5,6,7), List(5,6,7)))
+  }
+
+  "executing hasSubsequence(List(1,2,3,5,6,7), List(3,5))" should "return true" in {
+    assert(List.hasSubsequence(List(1,2,3,5,6,7), List(3,5)))
+  }
 
 }

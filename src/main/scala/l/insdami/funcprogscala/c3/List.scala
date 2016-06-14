@@ -113,5 +113,21 @@ object List {
 
   def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] = concat(map(as)(f))
 
+  def zipWith[A,B,C](l1: List[A], l2: List[B])(f: (A,B) => C): List[C] = {
+    def go(c1: List[A], c2: List[B], zipped: List[C] = Nil): List[C] = (c1, c2) match {
+      case (_, Nil) => zipped
+      case (Nil, _) => zipped
+      case (Cons(x1, xs1), Cons(x2,xs2)) => go(xs1, xs2, append2(zipped, Cons(f(x1, x2), Nil)))
+    }
+    go(l1, l2)
+  }
 
+  def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = {
+    (sup, sub) match {
+      case (_, Nil) => true
+      case (Cons(x1, xs1), Cons(x2, xs2)) if x1 == x2 => hasSubsequence(xs1, xs2)
+      case (Cons(x1, xs1), Cons(x2, xs2)) if x1 != x2 => hasSubsequence(dropWhile(sup, ((e: A) => e != x2)), xs2)
+      case _ => false
+    }
+  }
 }
